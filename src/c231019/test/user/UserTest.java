@@ -47,15 +47,15 @@ public class UserTest {
 
 	@After
 	public void dropTable() {
-		testDao.drop();
+//		testDao.drop();
 	}
 
 	@Test
 	public void add() throws SQLException {
 		
 		UserBean user = new UserBean();
-		user.setName("정경훈");
-		user.setUserId("jkh7");
+		user.setName("이민규");
+		user.setUserId("lmg");
 		user.setPassword("1234");
 		dao.add(user);
 	}
