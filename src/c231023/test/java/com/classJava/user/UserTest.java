@@ -22,16 +22,16 @@ public class UserTest {
 	@Before
 	public void initialize() {
 		dao.deleteAll();
-		User user1 = new User("권원준", "kwj", "qwer");
+		User user1 = new User("송성민", "ssm", "2632");
 		dao.add(user1);
 		dao.add(new User("임현규", "lhg", "486"));
 	}
 	
 	@Test
 	public void get() {
-		User createdUser = dao.get("kwj");
-		assertThat(createdUser.getName(), is("권원준"));
-		assertThat(createdUser.getPassword(), is("qwer"));
+		User createdUser = dao.get("ssm");
+		assertThat(createdUser.getName(), is("송성민"));
+		assertThat(createdUser.getPassword(), is("2632"));
 		createdUser = dao.get("lhg");
 		assertThat(createdUser.getName(), is("임현규"));
 		assertThat(createdUser.getPassword(), is("486"));
