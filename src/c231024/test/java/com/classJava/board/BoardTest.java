@@ -42,9 +42,9 @@ public class BoardTest {
 		
 		boardDAO.deleteAll();
 		User user = userDAO.get("ssm");
-		boardService.add(new Board(user, "테스트1", "테스트1 내용"), 1);
-		boardService.add(new Board(user, "테스트2", "테스트2 내용"), 1);
-		boardService.add(new Board(user, "테스트3", "테스트3 내용"), 1);
+		boardService.add(new Board(user, "테스트1", "테스트1 내용"));
+		boardService.add(new Board(user, "테스트2", "테스트2 내용"));
+		boardService.add(new Board(user, "테스트3", "테스트3 내용"));
 	}
 	
 	@Test
@@ -74,7 +74,7 @@ public class BoardTest {
 	@Test
 	public void add() {
 		Board board = new Board(userDAO.get("ssm"), "테스트중입니다.", "23년 10월 24일 테스트");
-		boardService.add(board, 1);
+		boardService.add(board);
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ public class BoardTest {
 		MockUserServiceTest userService = new MockUserServiceTest();
 		User user = userService.get(1);
 		Board board = new Board(user, "임시 데이터 테스트", "테스트중입니다.");
-		boardService.add(board, 0);
+		boardService.add(board);
 	}
 	
 	

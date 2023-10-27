@@ -18,5 +18,7 @@
 	<classpathentry kind="lib" path="lib/org.springframework.transaction-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/com.springsource.org.junit-4.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.test-3.0.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/com.springsource.org.aopalliance-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.aop-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

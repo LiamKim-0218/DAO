@@ -31,7 +31,7 @@ public class TransactionHandler implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		// TODO Auto-generated method stub
 		if(method.getName().startsWith(pattern)) return transaction(method, args);
-		else return method.invoke(method, args);
+		else return method.invoke(target, args);
 	}
 	
 	private Object transaction(Method method, Object[] args) throws Throwable {

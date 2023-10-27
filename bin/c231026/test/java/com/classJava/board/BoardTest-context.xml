@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521/xe" />
+		<property name="username" value="gyun" />
+		<property name="password" value="1234" />
+	</bean>
+	<bean id="userDAO"
+		class="c231024.main.java.com.classJava.user.dao.UserDAOJdbc">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="boardDAO"
+		class="c231024.main.java.com.classJava.board.dao.BoardDAOJdbc">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- <bean id="boardService" class="c231024.main.java.com.classJava.board.service.BoardServiceTX"> 
+		<property name="transactionManager" ref="transactionManager" /> <property 
+		name="boardService" ref="boardServiceImpl" /> </bean> -->
+	<bean id="boardService"
+		class="c231024.main.java.com.classJava.board.service.BoardServiceImpl">
+		<property name="userDAO" ref="userDAO" />
+		<property name="boardDAO" ref="boardDAO" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Transaction Proxy FactoryBean -->
+	<!-- <bean id="boardService" class="c231026.main.java.com.classJava.board.service.TxProxyFactoryBean"> 
+		<property name="target" ref="boardServiceImpl"></property> <property name="pattern" 
+		value="update"></property> <property name="transactionManager" ref="transactionManager"></property> 
+		<property name="serviceInterface" value="c231024.main.java.com.classJava.board.service.BoardService"></property> 
+		</bean> -->
+		
+	<!-- Transcation ProxyFactoryBean -->
+	<!-- 
+	<bean id="transactionAdvice"
+		class="c231026.main.java.com.classJava.board.service.TransactionAdvice">
+		<property name="transactionManager" ref="transactionManager"></property>
+	</bean>
+	<bean id="transactionPointcut"
+		class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="update*"></property>
+	</bean>
+	<bean id="transactionAdvisor"
+		class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="transactionAdvice"></property>
+		<property name="pointcut" ref="transactionPointcut"></property>
+	</bean>
+	<bean id="boardService"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="boardServiceImpl"></property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+	
+	<!-- Auto ProxyFactoryBean -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+	
+	<bean id="transactionAdvice"
+		class="c231026.main.java.com.classJava.board.service.TransactionAdvice">
+		<property name="transactionManager" ref="transactionManager"></property>
+	</bean>
+	<bean id="transactionPointcut"
+		class="c231026.main.java.com.classJava.board.service.TransactionPointcut">
+		<property name="mappedName" value="update*"></property>
+		<property name="mappedClassName" value="ServiceImpl"></property>
+	</bean>
+	<bean id="transactionAdvisor"
+		class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="transactionAdvice"></property>
+		<property name="pointcut" ref="transactionPointcut"></property>
+	</bean>
+	
+	
+</beans>

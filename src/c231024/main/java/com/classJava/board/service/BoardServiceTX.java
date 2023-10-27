@@ -9,6 +9,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import c231024.main.java.com.classJava.board.domain.Board;
 import c231024.main.java.com.classJava.user.domain.User;
 
+
+
 public class BoardServiceTX implements BoardService {
 	private BoardServiceImpl boardService;
 	private PlatformTransactionManager transactionManager;
@@ -23,8 +25,8 @@ public class BoardServiceTX implements BoardService {
 	}
 	
 	
-	public void add(Board board, int userId) {
-		boardService.add(board, userId);
+	public void add(Board board) {
+		boardService.add(board);
 	}
 	
 	

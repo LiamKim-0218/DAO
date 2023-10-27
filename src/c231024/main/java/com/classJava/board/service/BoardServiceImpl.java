@@ -27,9 +27,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	public void add(Board board, int userId) {
-		if(userService.isLogIn(userId)) boardDAO.add(board);
-		else new RuntimeException("로그인 필요");
+	public void add(Board board) {
+//		if(userService.isLogIn(userId)) 
+			boardDAO.add(board);
+//		else new RuntimeException("로그인 필요");
 	}
 
 	public Board get(int id) {
@@ -51,13 +52,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	public void updateBefore(Board board, User user) throws Exception {
-		if (board.getUserId() == user.getId()) {
-			boardDAO.update(board);
-		} else {
-			throw new Exception("wrong user");
-		}
-	}
+//	public void updateBefore(Board board, User user) throws Exception {
+//		if (board.getUserId() == user.getId()) {
+//			boardDAO.update(board);
+//		} else {
+//			throw new Exception("wrong user");
+//		}
+//	}
 	
 	
 	
@@ -77,7 +78,7 @@ public class BoardServiceImpl implements BoardService {
 	public void updateAll(User user) {
 		List<Board> list = getAll();
 		for(int i = 0; i<list.size();i++) {
-//			if(i == 2)user = new User("김남균", "knk", "1234");
+			if(i == 2)user = new User("김남균", "knk", "1234");
 			Board board = list.get(i);
 			board.setContent("삭제된 컨텐츠");
 			User writer = board.getUser();
@@ -90,24 +91,24 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	public void updateAllNotTS(User user)  throws Exception {
-		try {
-			List<Board> list = getAll();
-			for(int i = 0; i<list.size();i++) {
-				if(i == 2)user = new User("김남균", "knk", "1234");
-				Board board = list.get(i);
-				board.setContent("삭제된 컨텐츠");
-				User writer = board.getUser();
-				if (writer.getId() == user.getId()) {
-					boardDAO.update(board);
-				} else {
-					throw new Exception("wrong user");
-				}
-			}
-		}catch(Exception e) {
-			throw e;
-		}
-	}
+//	public void updateAllNotTS(User user)  throws Exception {
+//		try {
+//			List<Board> list = getAll();
+//			for(int i = 0; i<list.size();i++) {
+//				if(i == 2)user = new User("김남균", "knk", "1234");
+//				Board board = list.get(i);
+//				board.setContent("삭제된 컨텐츠");
+//				User writer = board.getUser();
+//				if (writer.getId() == user.getId()) {
+//					boardDAO.update(board);
+//				} else {
+//					throw new Exception("wrong user");
+//				}
+//			}
+//		}catch(Exception e) {
+//			throw e;
+//		}
+//	}
 
 	
 	
